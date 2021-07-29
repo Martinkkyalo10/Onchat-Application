@@ -47,7 +47,7 @@ const ChatFeed = (props) => {
 
 
             // b. if this is my message
-            const isMyMessage = userName === message.sender.userName;
+            const isMyMessage = userName === message.sender.username;
             // is my message if the userName is equal to userName of the message sender
 
             // what to output
@@ -65,7 +65,6 @@ const ChatFeed = (props) => {
 
                     </div>
                     <div className="read-receipts" style={{ marginRight: isMyMessage ? '18px' : '0px', marginLeft: isMyMessage ? '0px' : '68px' }}>
-                        {/* different appearence based on if it is my message or their message */}
                         {renderReadReceipts(message, isMyMessage)}
                     </div>
                 </div>
@@ -74,43 +73,44 @@ const ChatFeed = (props) => {
     };
 
     // what to check before rendering the chat
-    if (!chat)
+    if (!chat) {
         return <div />;
+    } else {
 
-    return (
+        return (
 
-        // ChatFeed
-        // structure of the chat feed
-        <div className="chat-feed">
-            <div className="chat-title-container">
+            // ChatFeed
+            // structure of the chat feed
+            <div className="chat-feed">
+                <div className="chat-title-container">
+                    <div className="chat-title">{chat?.title}</div>
+                    {/* if there is a chat, then access title variable */}
 
-                <div className="chat-title">
-                    {chat?.title}</div>
-                {/* if there is a chat, then access title variable */}
-
-                {/* use some dynamic logic to
+                    {/* use some dynamic logic to
                     -map through all the people
                     -get specific person and 
                     - return person's username as subtitle */}
-                <div className="chat-subtitle">
-                    {chat.people.map((person) => ` ${person.person.username}`)}
+                    <div className="chat-subtitle">
+                        {chat.people.map((person) => ` ${person.person.username}`)}
+                    </div>
                 </div>
+                {/* call render message function inside a dynamic logic */}
+
+                {renderMessages()}
+                {/* add space */}
+
+                <div style={{ height: '100px' }} />
+
+                {/* sending message */}
+                <div className="message-form-container">
+                    {/* render the MessageForm */}
+                    <MessageForm {...props} chatId={activeChat} />
+                </div>
+
             </div>
-            {/* call render message function inside a dynamic logic */}
+        );
+    };
 
-            {renderMessages()}
-            {/* add space */}
-
-            <div style={{ height: '100px' }} />
-
-            {/* sending message */}
-            <div className="message-form-container">
-                {/* render the MessageForm */}
-                <MessageForm {...props} chatId={activeChat} />
-            </div>
-
-        </div>
-    );
 }
 
 export default ChatFeed;

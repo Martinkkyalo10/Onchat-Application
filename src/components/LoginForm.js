@@ -8,7 +8,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const authObject = { 'Project-ID': "f930fd3c-a591-495c-b369-400adb47d71f", 'User-Name': username, 'User-Secret': password }
+        const authObject = { 'Project-ID': "f930fd3c-a591-495c-b369-400adb47d71f", 'User-Name': username, 'User-Secret': password };
         try {
 
             //auth user with username and password
@@ -20,11 +20,11 @@ const LoginForm = () => {
 
             // then reload the page
             window.location.reload();
-
+            setError('');
         } catch (error) {
-            setError('Oops, incorrect credentials!')
+            setError('Oops, incorrect credentials!');
         }
-    }
+    };
 
     return (
         <div className="wrapper">
@@ -35,17 +35,18 @@ const LoginForm = () => {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input" placeholder="Password" required />
                     <div align="center">
                         <button type="submit" className="button">
-                            <span style={{ color: 'blue' }}>Start Chatting</span>
+                            <span style={{ color: 'blue' }}>Chat Now</span>
                         </button>
                     </div>
-                    <h2 className="error">{error}</h2>
+
                 </form>
+                <h2 className="error">{error}</h2>
             </div>
 
         </div>
 
 
     );
-}
+};
 
 export default LoginForm;

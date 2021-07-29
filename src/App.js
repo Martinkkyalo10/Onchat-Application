@@ -13,7 +13,6 @@ const App = () => {
             projectID={'f930fd3c-a591-495c-b369-400adb47d71f'}
             userName={localStorage.getItem('username')}
             userSecret={localStorage.getItem('password')}
-
             // chat engine customerzation
             // render customized chat feed component
             renderChatFeed={(chatAppProps) => <ChatFeed  {...chatAppProps} />}
